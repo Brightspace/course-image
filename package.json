@@ -1,0 +1,37 @@
+{
+  "name": "d2l-utility-behavior",
+  "description": "Brightspace Utility Behavior",
+  "private": true,
+  "scripts": {
+    "postinstall": "bower install",
+    "test": "npm run test:lint:js && npm run test:lint:wc && wct",
+    "test:lint:js": "eslint --ext .js,.html .",
+    "test:lint:wc": "polylint --no-recursion --input *.html",
+    "test:no-lint": "wct -p"
+  },
+  "homepage": "https://github.com/Brightspace/utility-behavior",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brightspace/utility-behavior.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brightspace/utility-behavior/issues"
+  },
+  "keywords": [
+    "d2l",
+    "course",
+    "homepage",
+    "banner"
+  ],
+  "author": "D2L Corporation",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "eslint": "^2.4.0",
+    "eslint-config-brightspace": "^0.2.1",
+    "eslint-plugin-html": "^1.4.0",
+    "polylint": "^2.10.1",
+    "rimraf": "^2.5.2",
+    "web-component-tester": "^5.0.0"
+  }
+}

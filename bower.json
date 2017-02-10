@@ -1,0 +1,33 @@
+{
+  "name": "d2l-course-image",
+  "description": "Brightspace Course Image",
+  "authors": [
+    "D2L Corporation"
+  ],
+  "license": "Apache-2.0",
+  "keywords": [
+    "d2l",
+  	"utility",
+    "behavior"
+  ],
+  "homepage": "https://github.com/Brightspace/course-image",
+  "main": "d2l-course-image.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    ".editorconfig",
+    ".eslintrc",
+    ".gitignore",
+    ".travis.yml",
+    "package.json",
+    "test",
+    "tests",
+    "/demo/"
+  ],
+  "dependencies": {
+    "d2l-utility-behavior": "git://github.com/Brightspace/utility-behavior.git#^0.0.1",
+    "polymer": "^1.7.0"
+  }
+}
