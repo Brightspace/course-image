@@ -1,6 +1,6 @@
 {
   "name": "d2l-course-image",
-  "description": "Brightspace Utility Behavior",
+  "description": "Brightspace Course Image",
   "private": true,
   "scripts": {
     "postinstall": "bower install",
@@ -9,13 +9,13 @@
     "test:lint:wc": "polylint --no-recursion --input *.html",
     "test:no-lint": "wct -p"
   },
-  "homepage": "https://github.com/Brightspace/utility-behavior",
+  "homepage": "https://github.com/Brightspace/course-image",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Brightspace/utility-behavior.git"
+    "url": "https://github.com/Brightspace/course-image.git"
   },
   "bugs": {
-    "url": "https://github.com/Brightspace/utility-behavior/issues"
+    "url": "https://github.com/Brightspace/course-image/issues"
   },
   "keywords": [
     "d2l",
