@@ -27,7 +27,7 @@
     "/demo/"
   ],
   "dependencies": {
-    "d2l-organization-hm-behavior": "git://github.com/Brightspace/organization-hm-behavior.git#^0.0.1",
+    "d2l-organization-hm-behavior": "git://github.com/Brightspace/organization-hm-behavior.git#~0.0.1",
     "polymer": "^1.7.0"
   }
 }
