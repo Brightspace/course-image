@@ -40,6 +40,7 @@ Example:
 ### `image`:
 - The image that you want to display, must be in the same format as the course-catalog images
 ```js
+// Example
 var image = {
 	'class': ['course-image'],
 	'properties': {
