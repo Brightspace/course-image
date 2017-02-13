@@ -34,11 +34,16 @@ Example:
 	desktop: { size: 33 }
 }
 ```
-- The sizes parameter can also take in a string which will be provided directly to the srcset
+- The sizes parameter can also take in a string which will be provided directly to the srcset 'sizes' parameter
 
 ### `image`:
 - The image that you want to display, must be in the same format as the course-catalog images
 - The best way to get an appropriate image is to pull it from an `organization` hypermedia call
+- The passed in image must be a siren entity, you can create one of these by doing:
+```js
+var parser = document.createElement('d2l-siren-parser');
+var sirenImage = parser.parse(image);
+```
 
 ## Running tests locally in Windows
 

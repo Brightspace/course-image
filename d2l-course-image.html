@@ -31,7 +31,7 @@
 		</style>
 
 		<img
-			src="[[getDefaultImageLink(image, type)]]"
+			src="[[_getDefaultImageLink(image, type)]]"
 			srcset$=[[_srcset]]
 			sizes$=[[_tileSizes]]
 			on-load="_showImage"
@@ -49,7 +49,10 @@
 					type: String,
 					value: 'tile'
 				},
-				sizes: Object,
+				sizes: {
+					type: Object,
+					observer: '_onSizeChange'
+				},
 				image: {
 					type: Object,
 					observer: '_updateImageSource'
@@ -65,21 +68,25 @@
 				this._updateImageSource();
 			},
 			_updateImageSource: function(newValue, oldValue) {
+				if (newValue && newValue.getLinksByClass) {
+					this._srcset = this.getImageSrcset(this.image, this.type);
+					this._tileSizes = this._generateSizes(this.sizes);
 
-				this._srcset = this.getImageSrcset(this.image, this.type);
-				this._tileSizes = this._generateSizes(this.sizes);
-
-				var same = this.getDefaultImageLink(newValue, this.type) === this.getDefaultImageLink(oldValue, this.type);
-				var shown = (this._imageClass || '').indexOf('shown') > -1;
-				if (same && shown) {
-					setTimeout(this._showImage.bind(this), 50);
+					var same = oldValue && this.getDefaultImageLink(newValue, this.type) === this.getDefaultImageLink(oldValue, this.type);
+					var shown = (this._imageClass || '').indexOf('shown') > -1;
+					if (same && shown) {
+						setTimeout(this._showImage.bind(this), 50);
+					}
+					this._imageClass = 'd2l-course-image-hidden';
 				}
-				this._imageClass = 'd2l-course-image-hidden';
 			},
 			_defaultSizes: {
 				mobile: { maxwidth: 767, size: 100 },
 				tablet: { maxwidth: 991, size: 50 },
 				desktop: { size: 33 }
+			},
+			_onSizeChange: function(sizes) {
+				this._tileSizes = this._generateSizes(sizes);
 			},
 			_generateSizes: function(sizeObj) {
 				sizeObj = sizeObj || this._defaultSizes;
@@ -102,6 +109,12 @@
 				} else {
 					return sizeObj;
 				}
+			},
+			_getDefaultImageLink: function(image, type) {
+				if (!(image || {}).getLinksByClass) {
+					return;
+				}
+				return this.getDefaultImageLink(image, type);
 			},
 			_showImage: function() {
 				this._imageClass = 'shown';
