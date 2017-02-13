@@ -7,8 +7,8 @@
   "license": "Apache-2.0",
   "keywords": [
     "d2l",
-  	"utility",
-    "behavior"
+    "course",
+    "image"
   ],
   "homepage": "https://github.com/Brightspace/course-image",
   "main": "d2l-course-image.html",

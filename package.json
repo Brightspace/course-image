@@ -1,5 +1,5 @@
 {
-  "name": "d2l-utility-behavior",
+  "name": "d2l-course-image",
   "description": "Brightspace Utility Behavior",
   "private": true,
   "scripts": {
@@ -20,8 +20,7 @@
   "keywords": [
     "d2l",
     "course",
-    "homepage",
-    "banner"
+    "image"
   ],
   "author": "D2L Corporation",
   "license": "Apache-2.0",
@@ -31,7 +30,6 @@
     "eslint-config-brightspace": "^0.2.1",
     "eslint-plugin-html": "^1.4.0",
     "polylint": "^2.10.1",
-    "rimraf": "^2.5.2",
     "web-component-tester": "^5.0.0"
   }
 }
