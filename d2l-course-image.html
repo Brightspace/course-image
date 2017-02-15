@@ -1,0 +1,127 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-organization-hm-behavior/d2l-organization-hm-behavior.html">
+
+<dom-module id="d2l-course-image">
+	<template>
+		<style>
+			:host {
+				display: flex;
+				align-items: center;
+			}
+
+			.d2l-course-image-hidden {
+				opacity: 0;
+			}
+
+			.shown {
+				animation-name: shown;
+				animation-duration: 0.5s;
+				animation-fill-mode: forwards;
+			}
+
+			@keyframes shown {
+				0% { opacity: 0 }
+				100% { opacity: 1; }
+			}
+
+			img {
+				min-height: 100%;
+				width: 100%;
+			}
+		</style>
+
+		<img
+			src="[[_getDefaultImageLink(image, type)]]"
+			srcset$=[[_srcset]]
+			sizes$=[[_tileSizes]]
+			on-load="_showImage"
+			class$="[[_imageClass]]"
+		></img>
+
+	</template>
+	<script>
+		'use strict';
+
+		Polymer({
+			is: 'd2l-course-image',
+			properties: {
+				type: {
+					type: String,
+					value: 'tile'
+				},
+				sizes: {
+					type: Object,
+					observer: '_onSizeChange'
+				},
+				image: {
+					type: Object,
+					observer: '_updateImageSource'
+				},
+				_imageClass: String,
+				_srcset: String,
+				_tileSizes: String
+			},
+			behaviors: [
+				window.D2L.Hypermedia.OrganizationHMBehavior
+			],
+			ready: function() {
+				this._updateImageSource();
+			},
+			_updateImageSource: function(newValue, oldValue) {
+				if (newValue && newValue.getLinksByClass) {
+					this._srcset = this.getImageSrcset(this.image, this.type);
+					this._tileSizes = this._generateSizes(this.sizes);
+
+					var same = oldValue && this.getDefaultImageLink(newValue, this.type) === this.getDefaultImageLink(oldValue, this.type);
+					var shown = (this._imageClass || '').indexOf('shown') > -1;
+					if (same && shown) {
+						setTimeout(this._showImage.bind(this), 50);
+					}
+					this._imageClass = 'd2l-course-image-hidden';
+				}
+			},
+			_defaultSizes: {
+				mobile: { maxwidth: 767, size: 100 },
+				tablet: { maxwidth: 991, size: 50 },
+				desktop: { size: 33 }
+			},
+			_onSizeChange: function(sizes) {
+				this._tileSizes = this._generateSizes(sizes);
+			},
+			_generateSizes: function(sizeObj) {
+				sizeObj = sizeObj || this._defaultSizes;
+
+				if (typeof sizeObj === 'object') {
+					var newSizeObj = {};
+					['mobile', 'tablet', 'desktop'].forEach(function(cur) {
+						newSizeObj[cur] = {
+							maxwidth: sizeObj[cur] && sizeObj[cur].maxwidth || this._defaultSizes[cur].maxwidth,
+							size: sizeObj[cur] && sizeObj[cur].size || this._defaultSizes[cur].maxwidth
+						};
+					}.bind(this));
+
+					var mobileString = '(max-width: ' + newSizeObj.mobile.maxwidth + 'px) ' + newSizeObj.mobile.size + 'vw';
+					var tabletString = ', (max-width: ' + newSizeObj.tablet.maxwidth + 'px) and (min-width: ' +
+						(newSizeObj.mobile.maxwidth + 1) + 'px) ' + newSizeObj.tablet.size + 'vw';
+					var desktopString = ', ' + newSizeObj.desktop.size + 'vw';
+
+					return mobileString + tabletString + desktopString;
+				} else {
+					return sizeObj;
+				}
+			},
+			_getDefaultImageLink: function(image, type) {
+				if (!(image || {}).getLinksByClass) {
+					return;
+				}
+				return this.getDefaultImageLink(image, type);
+			},
+			_showImage: function() {
+				this._imageClass = 'shown';
+			},
+			getTileSizes: function() {
+				return this._tileSizes;
+			}
+		});
+	</script>
+</dom-module>

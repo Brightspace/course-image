@@ -1,0 +1,35 @@
+{
+  "name": "d2l-course-image",
+  "description": "Brightspace Course Image",
+  "private": true,
+  "scripts": {
+    "postinstall": "bower install",
+    "test": "npm run test:lint:js && npm run test:lint:wc && wct",
+    "test:lint:js": "eslint --ext .js,.html .",
+    "test:lint:wc": "polylint --no-recursion --input *.html",
+    "test:no-lint": "wct -p"
+  },
+  "homepage": "https://github.com/Brightspace/course-image",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brightspace/course-image.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brightspace/course-image/issues"
+  },
+  "keywords": [
+    "d2l",
+    "course",
+    "image"
+  ],
+  "author": "D2L Corporation",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "bower": "^1.7.7",
+    "eslint": "^2.4.0",
+    "eslint-config-brightspace": "^0.2.1",
+    "eslint-plugin-html": "^1.4.0",
+    "polylint": "^2.10.1",
+    "web-component-tester": "^5.0.0"
+  }
+}
