@@ -136,15 +136,13 @@ describe('d2l-image-banner-overlay', function() {
 	});
 
 	it('should generate an image with the passed in class', function() {
-		var parser = document.createElement('d2l-siren-parser');
-		component.image = parser.parse(image);
+		component.image = window.D2L.Hypermedia.Siren.Parse(image);
 		component.type = 'narrow';
 		expect(component.$$('.d2l-course-image').src.indexOf('narrow') > -1).to.equal(true);
 	});
 
 	it('should generate an image with "tile" class if no class is passed in', function() {
-		var parser = document.createElement('d2l-siren-parser');
-		component.image = parser.parse(image);
+		component.image = window.D2L.Hypermedia.Siren.Parse(image);
 		expect(component.$$('.d2l-course-image').src.indexOf('tile') > -1).to.equal(true);
 	});
 
