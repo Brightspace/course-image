@@ -28,6 +28,9 @@
   ],
   "dependencies": {
     "d2l-organization-hm-behavior": "git://github.com/Brightspace/organization-hm-behavior.git#^1.0.1",
-    "polymer": "^1.7.0"
+    "polymer": "^1.8.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "^6.0.0"
   }
 }

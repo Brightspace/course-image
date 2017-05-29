@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "postinstall": "bower install",
-    "test": "npm run test:lint:js && npm run test:lint:wc && wct",
-    "test:lint:js": "eslint --ext .js,.html .",
-    "test:lint:wc": "polylint --no-recursion --input *.html",
-    "test:no-lint": "wct -p"
+    "test": "npm run test:lint:js && npm run test:lint:wc && polymer test",
+    "test:lint:js": "eslint --ext .js,.html . test/",
+    "test:lint:wc": "polymer lint"
   },
   "homepage": "https://github.com/Brightspace/course-image",
   "repository": {
@@ -25,11 +24,10 @@
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
-    "bower": "^1.7.7",
+    "bower": "^1.8.0",
     "eslint": "^2.4.0",
-    "eslint-config-brightspace": "^0.2.1",
-    "eslint-plugin-html": "^1.4.0",
-    "polylint": "^2.10.1",
-    "web-component-tester": "^5.0.0"
+    "eslint-config-brightspace": "^0.2.4",
+    "eslint-plugin-html": "^2.0.3",
+    "polymer-cli": "^1.1.0"
   }
 }
