@@ -69,10 +69,10 @@
 			},
 			_updateImageSource: function(newValue, oldValue) {
 				if (newValue && newValue.getLinksByClass) {
-					this._srcset = this.getImageSrcset(this.image, this.type);
+					this._srcset = this.getImageSrcset(this.image, this.type, newValue.forceImageRefresh);
 					this._tileSizes = this._generateSizes(this.sizes);
 
-					var same = oldValue && this.getDefaultImageLink(newValue, this.type) === this.getDefaultImageLink(oldValue, this.type);
+					var same = oldValue && !newValue.forceImageRefresh && this.getDefaultImageLink(newValue, this.type) === this.getDefaultImageLink(oldValue, this.type);
 					var shown = (this._imageClass || '').indexOf('shown') > -1;
 					if (same && shown) {
 						setTimeout(this._showImage.bind(this), 50);
@@ -114,7 +114,9 @@
 				if (!(image || {}).getLinksByClass) {
 					return;
 				}
-				return this.getDefaultImageLink(image, type);
+				var dateTimeString = image.forceImageRefresh ? '#' + new Date().getTime() : '';
+
+				return this.getDefaultImageLink(image, type) + dateTimeString;
 			},
 			_showImage: function() {
 				this._imageClass = 'shown';

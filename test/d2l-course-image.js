@@ -119,7 +119,7 @@ var image = {
 	'rel': ['https://api.brightspace.com/rels/organization-image']
 };
 
-describe('d2l-image-banner-overlay', function() {
+describe('d2l-course-image', function() {
 	var component;
 
 	beforeEach(function() {
@@ -160,5 +160,13 @@ describe('d2l-image-banner-overlay', function() {
 		var sizes = '(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw';
 		component.sizes = sizes;
 		expect(component.$$('.d2l-course-image').sizes).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
+	});
+
+	it('should include date time stamps if force image refresh is true', function() {
+		var image = window.D2L.Hypermedia.Siren.Parse(image);
+
+		image.forceImageRefresh = true;
+		component.image = image;
+		expect(component.$$('.d2l-course-image').src.search('.*#[0-9]{13}') > -1).to.be.true;
 	});
 });
