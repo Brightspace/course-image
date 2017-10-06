@@ -120,10 +120,12 @@ var image = {
 };
 
 describe('d2l-course-image', function() {
-	var component;
+
+	var component, sirenImage;
 
 	beforeEach(function() {
 		component = fixture('d2l-course-image-fixture');
+		sirenImage = window.D2L.Hypermedia.Siren.Parse(image);
 	});
 
 	it('should exist on the page', function() {
@@ -136,13 +138,13 @@ describe('d2l-course-image', function() {
 	});
 
 	it('should generate an image with the passed in class', function() {
-		component.image = window.D2L.Hypermedia.Siren.Parse(image);
+		component.image = sirenImage;
 		component.type = 'narrow';
 		expect(component.$$('.d2l-course-image').src.indexOf('narrow') > -1).to.equal(true);
 	});
 
 	it('should generate an image with "tile" class if no class is passed in', function() {
-		component.image = window.D2L.Hypermedia.Siren.Parse(image);
+		component.image = sirenImage;
 		expect(component.$$('.d2l-course-image').src.indexOf('tile') > -1).to.equal(true);
 	});
 
@@ -163,10 +165,16 @@ describe('d2l-course-image', function() {
 	});
 
 	it('should include date time stamps if force image refresh is true', function() {
-		var image = window.D2L.Hypermedia.Siren.Parse(image);
-
-		image.forceImageRefresh = true;
-		component.image = image;
+		sirenImage.forceImageRefresh = true;
+		component.image = sirenImage;
 		expect(component.$$('.d2l-course-image').src.search('.*#[0-9]{13}') > -1).to.be.true;
 	});
+
+	it('should fire a "course-image-loaded" event when the image loads', function(done) {
+		component.addEventListener('course-image-loaded', function() {
+			done();
+		});
+		component.image = sirenImage;
+	});
+
 });
