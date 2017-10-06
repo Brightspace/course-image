@@ -3,10 +3,10 @@
   "description": "Brightspace Course Image",
   "private": true,
   "scripts": {
-    "postinstall": "bower install",
-    "test": "npm run test:lint:js && npm run test:lint:wc && polymer test",
-    "test:lint:js": "eslint --ext .js,.html . test/",
-    "test:lint:wc": "polymer lint"
+    "postinstall": "polymer install --variants",
+    "lint": "npm run lint:html && polymer lint",
+    "lint:html": "eslint *.html test/*.html test/*.js",
+    "test": "npm run lint && polymer test --skip-plugin sauce"
   },
   "homepage": "https://github.com/Brightspace/course-image",
   "repository": {
@@ -24,10 +24,9 @@
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
-    "bower": "^1.8.0",
-    "eslint": "^2.4.0",
-    "eslint-config-brightspace": "^0.2.4",
-    "eslint-plugin-html": "^2.0.3",
-    "polymer-cli": "^1.1.0"
+    "eslint": "^4.8.0",
+    "eslint-config-brightspace": "^0.3.1",
+    "eslint-plugin-html": "^3.2.2",
+    "polymer-cli": "^1.5.6"
   }
 }
