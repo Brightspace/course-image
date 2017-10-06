@@ -120,6 +120,9 @@
 			},
 			_showImage: function() {
 				this._imageClass = 'shown';
+				Polymer.RenderStatus.afterNextRender(this, function() {
+					this.fire('course-image-loaded');
+				}.bind(this));
 			},
 			getTileSizes: function() {
 				return this._tileSizes;
