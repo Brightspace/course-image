@@ -69,8 +69,17 @@
 			},
 			_updateImageSource: function(newValue, oldValue) {
 				if (newValue && newValue.getLinksByClass) {
-					this._srcset = newValue.forceImageRefresh ? '' : this.getImageSrcset(this.image, this.type);
-					this._tileSizes = this._generateSizes(this.sizes);
+					if (newValue.forceImageRefresh) {
+						var newImg = document.createElement("IMG");
+						newImg.src = this._getDefaultImageLink(newValue, this.type);
+						Polymer.dom(this.root).removeChild(this.$$('img'));
+						Polymer.dom(this.root).appendChild(newImg);
+						/* NOTE: this is just an experiment as-is, the new img node created
+						 * above does not have all properties setup like srcset and class, etc */
+					} else {
+						this._srcset = this.getImageSrcset(this.image, this.type);
+						this._tileSizes = this._generateSizes(this.sizes);
+					}
 
 					var same = oldValue && !newValue.forceImageRefresh && this.getDefaultImageLink(newValue, this.type) === this.getDefaultImageLink(oldValue, this.type);
 					var shown = (this._imageClass || '').indexOf('shown') > -1;
