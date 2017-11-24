@@ -125,6 +125,7 @@ describe('d2l-course-image', function() {
 
 	beforeEach(function() {
 		component = fixture('d2l-course-image-fixture');
+		component._load = true;
 		sirenImage = window.D2L.Hypermedia.Siren.Parse(image);
 	});
 
