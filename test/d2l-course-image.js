@@ -178,4 +178,17 @@ describe('d2l-course-image', function() {
 		component.image = sirenImage;
 	});
 
+	it('should not update the image src/srcset if the image is not in the viewport', function() {
+		component._load = false;
+		component._src = 'foo';
+		component.image = sirenImage;
+		expect(component._src).to.equal('foo');
+	});
+
+	it('should update the image src/srcset if the image is in the viewport', function() {
+		component._src = 'foo';
+		component.image = sirenImage;
+		expect(component._src).to.not.equal('foo');
+	});
+
 });
