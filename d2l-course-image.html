@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-intersection-observer-polyfill-import/intersection-observer.html">
 <link rel="import" href="../d2l-organization-hm-behavior/d2l-organization-hm-behavior.html">
 
 <dom-module id="d2l-course-image">
@@ -7,10 +8,6 @@
 			:host {
 				display: flex;
 				align-items: center;
-			}
-
-			.d2l-course-image-hidden {
-				opacity: 0;
 			}
 
 			.shown {
@@ -31,17 +28,15 @@
 		</style>
 
 		<img
-			src="[[_getDefaultImageLink(image, type)]]"
-			srcset$=[[_srcset]]
-			sizes$=[[_tileSizes]]
+			src="[[_src]]"
+			srcset$="[[_srcset]]"
+			sizes$="[[_tileSizes]]"
 			on-load="_showImage"
 			class$="[[_imageClass]]"
 		></img>
 
 	</template>
 	<script>
-		'use strict';
-
 		Polymer({
 			is: 'd2l-course-image',
 			properties: {
@@ -49,44 +44,48 @@
 					type: String,
 					value: 'tile'
 				},
-				sizes: {
-					type: Object,
-					observer: '_onSizeChange'
-				},
-				image: {
-					type: Object,
-					observer: '_updateImageSource'
-				},
+				sizes: Object,
+				image: Object,
 				_imageClass: String,
+				_src: String,
 				_srcset: String,
-				_tileSizes: String
+				_tileSizes: {
+					type: String,
+					computed: '_generateSizes(sizes)'
+				},
+				// Set by the IntersectionObserver when the image is first visible in viewport
+				_load: Boolean
 			},
 			behaviors: [
 				window.D2L.Hypermedia.OrganizationHMBehavior
 			],
-			ready: function() {
-				this._updateImageSource();
-			},
-			_updateImageSource: function(newValue, oldValue) {
-				if (newValue && newValue.getLinksByClass) {
-					this._srcset = this.getImageSrcset(this.image, this.type, newValue.forceImageRefresh);
-					this._tileSizes = this._generateSizes(this.sizes);
+			observers: [
+				'_updateImage(_load, image, type)'
+			],
+			attached: function() {
+				Polymer.RenderStatus.afterNextRender(this, function() {
+					var imageElement = this.$$('img');
 
-					var same = oldValue && !newValue.forceImageRefresh && this.getDefaultImageLink(newValue, this.type) === this.getDefaultImageLink(oldValue, this.type);
-					var shown = (this._imageClass || '').indexOf('shown') > -1;
-					if (same && shown) {
-						setTimeout(this._showImage.bind(this), 50);
-					}
-					this._imageClass = 'd2l-course-image-hidden';
-				}
+					var observerCallback = function(entries, observer) {
+						for (var i = 0; i < entries.length; i++) {
+							// Chrome/FF immediately call the callback when we observer.observe()
+							// so we need to also make sure the image is visible for that first run
+							// see https://bugs.chromium.org/p/chromium/issues/detail?id=713819
+							if (entries[i].intersectionRatio > 0) {
+								observer.unobserve(imageElement);
+								this._load = true;
+								break;
+							}
+						}
+					};
+					var observer = new IntersectionObserver(observerCallback.bind(this));
+					observer.observe(imageElement);
+				});
 			},
 			_defaultSizes: {
 				mobile: { maxwidth: 767, size: 100 },
 				tablet: { maxwidth: 991, size: 50 },
 				desktop: { size: 33 }
-			},
-			_onSizeChange: function(sizes) {
-				this._tileSizes = this._generateSizes(sizes);
 			},
 			_generateSizes: function(sizeObj) {
 				sizeObj = sizeObj || this._defaultSizes;
@@ -110,13 +109,14 @@
 					return sizeObj;
 				}
 			},
-			_getDefaultImageLink: function(image, type) {
-				if (!(image || {}).getLinksByClass) {
+			_updateImage: function(load, image, type) {
+				if (!load || !(image || {}).getLinksByClass) {
 					return;
 				}
 				var dateTimeString = image.forceImageRefresh ? '#' + new Date().getTime() : '';
 
-				return this.getDefaultImageLink(image, type) + dateTimeString;
+				this._src = this.getDefaultImageLink(image, type) + dateTimeString;
+				this._srcset = this.getImageSrcset(image, type, image.forceImageRefresh);
 			},
 			_showImage: function() {
 				this._imageClass = 'shown';
