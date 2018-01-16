@@ -5,11 +5,6 @@
 <dom-module id="d2l-course-image">
 	<template>
 		<style>
-			:host {
-				display: flex;
-				align-items: center;
-			}
-
 			.shown {
 				animation-name: shown;
 				animation-duration: 0.5s;
@@ -22,7 +17,9 @@
 			}
 
 			img {
-				min-height: 100%;
+				object-fit: cover;
+				object-position: center;
+				height: 100%;
 				width: 100%;
 			}
 		</style>
@@ -33,7 +30,7 @@
 			sizes$="[[_tileSizes]]"
 			on-load="_showImage"
 			class$="[[_imageClass]]"
-		></img>
+		/>
 
 	</template>
 	<script>
