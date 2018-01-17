@@ -22,6 +22,8 @@
     ".gitignore",
     ".travis.yml",
     "package.json",
+    "polymer.json",
+    "wct.conf.json",
     "test",
     "tests",
     "/demo/"
