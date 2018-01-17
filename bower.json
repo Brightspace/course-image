@@ -31,7 +31,7 @@
   "dependencies": {
     "d2l-intersection-observer-polyfill-import": "Brightspace/intersection-observer-polyfill-import#^1.0.0",
     "d2l-organization-hm-behavior": "git://github.com/Brightspace/organization-hm-behavior.git#^1.1.0",
-    "polymer": "^1.8.0"
+    "polymer": "1.9.1 - 2"
   },
   "devDependencies": {
     "d2l-typography": "^6.0.0",
@@ -39,5 +39,18 @@
     "iron-demo-helpers": "^2.0.0",
     "iron-test-helpers": "^2.0.0",
     "web-component-tester": "^6.0.0"
+  },
+  "variants": {
+    "1.x": {
+      "dependencies": {
+        "polymer": "^1.9.1"
+      },
+      "resolutions": {
+        "webcomponentsjs": "^0.7.24"
+      }
+    }
+  },
+  "resolutions": {
+    "webcomponentsjs": "^v1.0.0"
   }
 }
