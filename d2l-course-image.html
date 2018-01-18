@@ -41,6 +41,10 @@ Polymer-based web component for course image.
 
 	</template>
 	<script>
+		window.D2L = window.D2L || {};
+		window.D2L.PolymerBehaviors = window.D2L.PolymerBehaviors || {};
+		window.D2L.PolymerBehaviors.Hypermedia = window.D2L.PolymerBehaviors.Hypermedia || {};
+
 		Polymer({
 			is: 'd2l-course-image',
 			properties: {
@@ -61,7 +65,7 @@ Polymer-based web component for course image.
 				_load: Boolean
 			},
 			behaviors: [
-				window.D2L.Hypermedia.OrganizationHMBehavior
+				D2L.PolymerBehaviors.Hypermedia.OrganizationHMBehavior
 			],
 			observers: [
 				'_updateImage(_load, image, type)'
