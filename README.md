@@ -21,6 +21,7 @@ Include the [webcomponents.js](http://webcomponents.org/polyfills/) "lite" polyf
 	<script src="../webcomponentsjs/webcomponents-lite.js"></script>
 	<link rel="import" href="../d2l-course-image/d2l-course-image.html">
 </head>
+```
 
 Then use where needed:
 <!---
