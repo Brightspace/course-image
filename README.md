@@ -21,6 +21,7 @@ Include the [webcomponents.js](http://webcomponents.org/polyfills/) "lite" polyf
 	<script src="../webcomponentsjs/webcomponents-lite.js"></script>
 	<link rel="import" href="../d2l-course-image/d2l-course-image.html">
 </head>
+```
 
 Then use where needed:
 <!---
@@ -28,6 +29,7 @@ Then use where needed:
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+	<script src="https://s.brightspace.com/lib/siren-parser/6.0.0/siren-parser.js"></script>
     <link rel="import" href="d2l-course-image.html">
     <style>
       html {
