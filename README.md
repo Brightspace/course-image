@@ -98,7 +98,7 @@ Tests in this repo use web-component-tester (WCT). Currently WCT has an issue in
 
 ```shell
 LAUNCHPAD_BROWSERS=CHROME
-LAUNCHPAD_CHROME-'C:\Program Files (x86)\Google\Chrome\Application'
+LAUNCHPAD_CHROME='C:\Program Files (x86)\Google\Chrome\Application'
 ```
 
 ## Coding styles

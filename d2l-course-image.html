@@ -83,7 +83,7 @@ Polymer-based web component for course image.
 			],
 			attached: function() {
 				Polymer.RenderStatus.afterNextRender(this, function() {
-					var imageElement = this.$$('img');
+					var imageElement = Polymer.dom(this.root).querySelector('img');
 
 					var observerCallback = function(entries, observer) {
 						for (var i = 0; i < entries.length; i++) {
