@@ -48,11 +48,22 @@ Polymer-based web component for course image.
 		Polymer({
 			is: 'd2l-course-image',
 			properties: {
+				/**
+ 				 * The type of image aspect-ratio wanted.  Supported options currently include `'tile'` and `'narrow'`.
+ 				 */
 				type: {
 					type: String,
 					value: 'tile'
 				},
+				/**
+				 * The vw (viewport-width) that the image will take up on the screen for various breakpoints.
+				 * This is used for the srcset `'sizes'` parameter, and falls back to the defaults if none provided.
+				 */
 				sizes: Object,
+				/**
+				 * The image that you want to display.  It must be in the same format as the course-catalog images,
+				 * and must be a converted into a siren entity.
+				 */
 				image: Object,
 				_imageClass: String,
 				_src: String,
@@ -61,7 +72,7 @@ Polymer-based web component for course image.
 					type: String,
 					computed: '_generateSizes(sizes)'
 				},
-				// Set by the IntersectionObserver when the image is first visible in viewport
+				// Set by the `IntersectionObserver` when the image is first visible in viewport
 				_load: Boolean
 			},
 			behaviors: [
@@ -132,6 +143,11 @@ Polymer-based web component for course image.
 					this.fire('course-image-loaded');
 				}.bind(this));
 			},
+			/**
+			 * Gets the tile sizes as a string with units, based on the `sizes` object passed into the element
+			 * (or the defaults, if that object was missing information).
+			 * @return {string}
+			 */
 			getTileSizes: function() {
 				return this._tileSizes;
 			}
