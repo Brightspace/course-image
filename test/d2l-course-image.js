@@ -156,13 +156,13 @@ describe('d2l-course-image', function() {
 			desktop: { size: 33 }
 		};
 		component.sizes = sizes;
-		expect(Polymer.dom(component.root).querySelector('img').sizes).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
+		expect(Polymer.dom(component.root).querySelector('img').getAttribute('sizes')).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
 	});
 
 	it('should directly pass the sizes to the image if a string "sizes" is provided', function() {
 		var sizes = '(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw';
 		component.sizes = sizes;
-		expect(Polymer.dom(component.root).querySelector('img').sizes).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
+		expect(Polymer.dom(component.root).querySelector('img').getAttribute('sizes')).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
 	});
 
 	it('should include date time stamps if force image refresh is true', function() {
