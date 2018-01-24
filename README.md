@@ -201,14 +201,16 @@ To lint AND run local unit tests:
 npm test
 ```
 
-## Running tests locally in Windows
+### Running tests locally in Windows
 
-Tests in this repo use web-component-tester (WCT). Currently WCT has an issue in Windows with tests taking about a minute to start.  A workaround is to set two environment variables for Launchpad (a library used by WCT).  These help bypass browser searching which is what causes the delay.  For example:
+Tests in this repo use web-component-tester (WCT). Currently WCT has an issue in Windows with tests taking a few minutes to start.  A workaround is to set two environment variables for Launchpad (a library used by WCT).  These help bypass browser searching which is what causes the delay.  For example:
 
 ```shell
 LAUNCHPAD_BROWSERS=chrome
-LAUNCHPAD_CHROME='C:\Program Files (x86)\Google\Chrome\Application'
+LAUNCHPAD_CHROME='C:\Program Files (x86)\Google\Chrome\Application\chrome.exe'
 ```
+
+An alternative would be to run `polymer serve` and then visit `http://localhost:<port>/components/d2l-course-image/test/` in the browser you wish to run the tests on.  Using this method, you can run the tests in any local browser.
 
 ## Coding styles
 
