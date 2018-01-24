@@ -12,7 +12,9 @@
 			'use strict';
 			// Load and run all tests (.html, .js):
 			WCT.loadSuites([
-				'./d2l-course-image.html'
+				'./d2l-course-image.html?wc-shadydom=true&wc-ce=true',
+				'./d2l-course-image.html?dom=shadow',
+				'./d2l-course-image.html?dom=shadow&lazyRegister=true&useNativeCSSProperties=true'
 			]);
 		</script>
 	</body>

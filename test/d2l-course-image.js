@@ -130,23 +130,23 @@ describe('d2l-course-image', function() {
 	});
 
 	it('should exist on the page', function() {
-		expect(component.$$('.d2l-course-image') !== null).to.equal(true);
+		expect(Polymer.dom(component.root).querySelector('img') !== null).to.equal(true);
 	});
 
 	it('should not crash if not passed siren entity', function() {
 		component.image = image;
-		expect(component.$$('.d2l-course-image') !== null).to.equal(true);
+		expect(Polymer.dom(component.root).querySelector('img') !== null).to.equal(true);
 	});
 
 	it('should generate an image with the passed in class', function() {
 		component.image = sirenImage;
 		component.type = 'narrow';
-		expect(component.$$('.d2l-course-image').src.indexOf('narrow') > -1).to.equal(true);
+		expect(Polymer.dom(component.root).querySelector('img').src.indexOf('narrow') > -1).to.equal(true);
 	});
 
 	it('should generate an image with "tile" class if no class is passed in', function() {
 		component.image = sirenImage;
-		expect(component.$$('.d2l-course-image').src.indexOf('tile') > -1).to.equal(true);
+		expect(Polymer.dom(component.root).querySelector('img').src.indexOf('tile') > -1).to.equal(true);
 	});
 
 	it('should generate a srcset if a "sizes" object is passed in', function() {
@@ -156,19 +156,19 @@ describe('d2l-course-image', function() {
 			desktop: { size: 33 }
 		};
 		component.sizes = sizes;
-		expect(component.$$('.d2l-course-image').sizes).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
+		expect(Polymer.dom(component.root).querySelector('img').getAttribute('sizes')).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
 	});
 
 	it('should directly pass the sizes to the image if a string "sizes" is provided', function() {
 		var sizes = '(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw';
 		component.sizes = sizes;
-		expect(component.$$('.d2l-course-image').sizes).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
+		expect(Polymer.dom(component.root).querySelector('img').getAttribute('sizes')).to.equal('(max-width: 111px) 100vw, (max-width: 222px) and (min-width: 112px) 50vw, 33vw');
 	});
 
 	it('should include date time stamps if force image refresh is true', function() {
 		sirenImage.forceImageRefresh = true;
 		component.image = sirenImage;
-		expect(component.$$('.d2l-course-image').src.search('.*#[0-9]{13}') > -1).to.be.true;
+		expect(Polymer.dom(component.root).querySelector('img').src.search('.*#[0-9]{13}') > -1).to.be.true;
 	});
 
 	it('should fire a "course-image-loaded" event when the image loads', function(done) {

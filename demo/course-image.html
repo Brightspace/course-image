@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<title>d2l-course-image demo</title>
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="https://s.brightspace.com/lib/siren-parser/6.0.0/siren-parser.js"></script>
+		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+		<link rel="import" href="../../d2l-typography/d2l-typography.html">
+		<link rel="import" href="../d2l-course-image.html">
+		<custom-style>
+			<style is="custom-style" include="demo-pages-shared-styles"></style>
+		</custom-style>
+		<custom-style include="d2l-typography">
+			<style is="custom-style" include="d2l-typography"></style>
+		</custom-style>
+		<style>
+			html {
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body unresolved class="d2l-typography">
+		<div class="vertical-section-container centered">
+			<h3>Course Image</h3>
+			<demo-snippet>
+				<template>
+					<div>Default</div>
+					<d2l-course-image></d2l-course-image>
+					<script>
+						var imageObject = {
+							'class': ['course-image'],
+							'properties': {
+								'name': 'structures_0013',
+								'categories': ['default', 'structures/support'],
+								'tags': ['carnival'],
+								'lastModified': 1485968984021
+							},
+							'entities': [{
+								'class': ['color'],
+								'properties': {
+									'description': 'vibrant',
+									'r': 130, 'g': 182, 'b': 213
+								},
+								'rel': ['https://api.brightspace.com/rels/color']
+							}],
+							'links': [{
+								'rel': ['self'],
+								'href': 'https://course-image-catalog.api.brightspace.com/images/b53fc2ae-0de4-41da-85ff-875372daeacc'
+							}, {
+								'rel': ['via'],
+								'href': 'https://www.pexels.com/photo/white-steel-ferris-wheel-89505/'
+							}, {
+								'rel': ['alternate'],
+								'class': ['tile', 'high-density', 'max'],
+								'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/tile-high-density-max-size.jpg',
+								'type': 'image/jpeg'
+							}, {
+								'rel': ['alternate'],
+								'class': ['banner', 'narrow', 'high-density', 'min'],
+								'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/banner-narrow-high-density-min-size.jpg',
+								'type': 'image/jpeg'
+							}],
+							'rel': ['https://api.brightspace.com/rels/organization-image']
+						};
+
+						var sirenImage = window.D2L.Hypermedia.Siren.Parse(imageObject);
+						document.body.querySelector('d2l-course-image').image = sirenImage;
+					</script>
+				</template>
+			</demo-snippet>
+		</div>
+	</body>
+</html>
