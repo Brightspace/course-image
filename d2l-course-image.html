@@ -1,6 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-intersection-observer-polyfill-import/intersection-observer.html">
 <link rel="import" href="../d2l-organization-hm-behavior/d2l-organization-hm-behavior.html">
+<link rel="import" href="../siren-parser-import/siren-parser.html">
 
 <!--
 `d2l-course-image`
@@ -62,8 +63,7 @@ Polymer-based web component for course image.
 				 */
 				sizes: Object,
 				/**
-				 * The image that you want to display.  It must be in the same format as the course-catalog images,
-				 * and must be a converted into a siren entity.
+				 * The image that you want to display.  It must be in the same format as the course-catalog images.
 				 */
 				image: Object,
 				_imageClass: String,
@@ -130,7 +130,12 @@ Polymer-based web component for course image.
 				}
 			},
 			_updateImage: function(load, image, type) {
-				if (!load || !(image || {}).getLinksByClass) {
+				if (!load || !image) {
+					return;
+				}
+				if (!image.getLinksByClass) {
+					// This will re-call _updateImage with the parsed image, so we can return immediately
+					this.image = window.D2L.Hypermedia.Siren.Parse(image);
 					return;
 				}
 				var dateTimeString = image.forceImageRefresh ? '#' + new Date().getTime() : '';

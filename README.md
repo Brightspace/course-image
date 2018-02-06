@@ -29,7 +29,6 @@ Then use where needed:
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-	<script src="https://s.brightspace.com/lib/siren-parser/6.0.0/siren-parser.js"></script>
     <link rel="import" href="d2l-course-image.html">
     <style>
       html {
@@ -80,8 +79,7 @@ Then use where needed:
 			'rel': ['https://api.brightspace.com/rels/organization-image']
 		};
 
-		var sirenImage = window.D2L.Hypermedia.Siren.Parse(imageObject);
-		document.body.querySelector('d2l-course-image').image = sirenImage;
+		document.body.querySelector('d2l-course-image').image = imageObject;
 	</script>
   </template>
 </custom-element-demo>
@@ -158,13 +156,6 @@ var image = {
 	'rel': ['https://api.brightspace.com/rels/organization-image']
 };
 
-```
-- The passed in image must be a siren entity, you can convert the siren-json into one by doing:
-
-```html
-<script src="https://s.brightspace.com/lib/siren-parser/6.0.0/siren-parser.js">
-	var sirenImage = window.D2L.Hypermedia.Siren.Parse(imageObject);
-</script>
 ```
 
 ## Developing, Testing and Contributing
