@@ -5,7 +5,6 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 		<title>d2l-course-image demo</title>
 		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<script src="https://s.brightspace.com/lib/siren-parser/6.0.0/siren-parser.js"></script>
 		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
 		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
 		<link rel="import" href="../../d2l-typography/d2l-typography.html">
@@ -66,8 +65,7 @@
 							'rel': ['https://api.brightspace.com/rels/organization-image']
 						};
 
-						var sirenImage = window.D2L.Hypermedia.Siren.Parse(imageObject);
-						document.body.querySelector('d2l-course-image').image = sirenImage;
+						document.body.querySelector('d2l-course-image').image = imageObject;
 					</script>
 				</template>
 			</demo-snippet>
