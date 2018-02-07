@@ -14,14 +14,7 @@ Polymer-based web component for course image.
 	<template strip-whitespace>
 		<style>
 			.shown {
-				animation-name: shown;
-				animation-duration: 0.5s;
-				animation-fill-mode: forwards;
-			}
-
-			@keyframes shown {
-				0% { opacity: 0 }
-				100% { opacity: 1; }
+				opacity: 1;
 			}
 
 			img {
@@ -30,6 +23,7 @@ Polymer-based web component for course image.
 				height: 100%;
 				width: 100%;
 				opacity: 0;
+				transition: opacity 0.5s;
 			}
 		</style>
 
