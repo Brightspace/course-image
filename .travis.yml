@@ -2,10 +2,10 @@ language: node_js
 node_js: node
 script:
 - npm run lint
-- polymer test --skip-plugin local
-addons:
-  jwt:
-    secure: L8cQq6EPy7JUTAIeO0IEUbrRIqlHWqniF9oS7tiRQlhTXG+NESoW6Co6k9oQ3+yF5C6pd+IQRUr0x9XOetdsmzfcMUdW0JJ2RAfm0Tw8uhTbSiISYC3a35ekvCjYOTpA546FX4Ds0F/FId7H+q7CI7Q4dIFUos0g7kUPxxQ8ZdZgNGlGoHiRjQSlffQ0ZbRbvZbN1rWVPrToJhqSj28Me1JIxXTeGerR6BSFNDXCYvoggjoQDQkeG1Xojr0vJJJf/fSWjQDnT7v758ylZHf7SYE9uXq9y5+KMaZYOf1mtvf08xkOEiS8IiJz2THzJrv+4KlbwrbNkWbOE+AsSxvKlqi9lek2lvQ87rtpm8NfNrNacg/Di/u7lHtYpTHpB8Ri2Gs8y4/rJUOCY4W5lbeDOs67G3x0wNlXwd/RPaRipZM3xROhvqAdB35VzBSxInd7DYwHLP2GnqyJTOCgMjaZ26WeC8Klmf39XWkBd7VqJKcH5p1Prq6GZddT7wygS3pAj2pK6ZXffvie+5oCsXG3cB/W91c67wVYJizFNciGDie8DHJ7MExNF6I5WHL3bQIP2hxexFfzQK44KZQsUMDTwPfM98WunogSMpHUWUzPI09uO7L0L2GkstZtSwKxo5HvpayK16pBxvqw+BhmCX5zqqAJ7tkHN+xlVfQTViKVjvE=
+- 'if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then polymer test --skip-plugin local; fi'
+- 'if [ "$TRAVIS_SECURE_ENV_VARS" = "false" ]; then polymer test --skip-plugin sauce; fi'
 env:
   global:
-    SAUCE_USERNAME: Desire2Learn
+  - SAUCE_USERNAME: Desire2Learn
+  # SAUCE_ACCESS_KEY
+  - secure: folm2n3smai2/8+m3UeM2lxOoiK0ZIfWDitAnEJarV7LY/1ExLRjp/4NAYHtdsIVFGfRz7Gzk/gOo7xXvWFbTf2qqWhV+2k2GStmyMYbJKYMxypOm8WPhpd9H5/flsUDOednQWzGoHxXitSZLJseQD6AkwS+gGtja8RlpI42GnDXW40NQ/FPjfdmqkzQ7nqPN4P7dgTJymBW1wAFGtpoGD8nxuk3WBMaA+70wHYSFTOa9ngf+fom4Fi6lbqqAnThLc3smjewnKUh61U6wUEcg6BoY/NaF/PkbmzL9Llr0oTGrK6HkFiU1j9Kj/3PFXnx4srpCsXJwJ1UOOkxhYIrsLnalQmW+24rrMwsNHSmZp196cX/UfOT+iAH9lnFKGGYtLkcNTitcmTG1osCvF9aWR2k4Ug5LORXpaLRqwWDG40CPF1C3z7kwakPtLLmHBybFe6eQRbERC+Qsb0LIdTsgRJmGw1N+H9If6gkZe8BTv0qSVuD0jZ2ZM/8IFfynVx12BpUZ+7rdTv+l8VeHD5wUg+a83Gd+jOVnzHPLLFACcB34O+EgggIXb+3Qu2f/Cr0FXSx21WdD7/xQik3Dp0Qj2usPoWJwOE/5Pw/d94GS20chrOJn+Sf5/r0lWSH/3XybZUs+nPojY1Q86HQt8mOWF7JIsgXQEeotHppca+Sg5M=
