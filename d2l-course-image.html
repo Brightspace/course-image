@@ -135,8 +135,14 @@ Polymer-based web component for course image.
 				}
 				var dateTimeString = image.forceImageRefresh ? '#' + new Date().getTime() : '';
 
-				this._src = this.getDefaultImageLink(image, type) + dateTimeString;
-				this._srcset = this.getImageSrcset(image, type, image.forceImageRefresh);
+				var imageSrc = this.getDefaultImageLink(image, type) + dateTimeString;
+				if (imageSrc) {
+					this._src = imageSrc;
+				}
+				var imageSrcset = this.getImageSrcset(image, type, image.forceImageRefresh);
+				if (imageSrcset) {
+					this._srcset = imageSrcset;
+				}
 			},
 			_showImage: function() {
 				this._imageClass = 'shown';
