@@ -1,5 +1,5 @@
 language: node_js
-node_js: node
+node_js: 9
 script:
 - npm run lint
 - 'if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then polymer test --skip-plugin local; fi'
