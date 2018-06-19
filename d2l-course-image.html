@@ -133,11 +133,11 @@ Polymer-based web component for course image.
 					this.image = window.D2L.Hypermedia.Siren.Parse(image);
 					return;
 				}
-				var dateTimeString = image.forceImageRefresh ? '#' + new Date().getTime() : '';
 
-				var imageSrc = this.getDefaultImageLink(image, type) + dateTimeString;
+				var imageSrc = this.getDefaultImageLink(image, type);
 				if (imageSrc) {
-					this._src = imageSrc;
+					var dateTimeString = image.forceImageRefresh ? '#' + new Date().getTime() : '';
+					this._src = imageSrc + dateTimeString;
 				}
 				var imageSrcset = this.getImageSrcset(image, type, image.forceImageRefresh);
 				if (imageSrcset) {
