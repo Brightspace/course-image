@@ -93,6 +93,20 @@ Polymer-based web component for course image.
 							}
 						}
 					};
+
+					// Small shim for Edge/IE/Safari
+					var delayFunction = window.requestIdleCallback || setTimeout;
+					delayFunction(function() {
+						if (this._load) {
+							// The tile already loaded via the IntersectionObserver
+							return;
+						}
+						// Whether we load because the tile became visible, or because we got some
+						// idle time, we want to disconnect the observer either way
+						observer.unobserve(imageElement);
+						this._load = true;
+					}.bind(this));
+
 					var observer = new IntersectionObserver(observerCallback.bind(this));
 					observer.observe(imageElement);
 				});
