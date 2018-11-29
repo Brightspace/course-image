@@ -28,47 +28,51 @@
 				<template>
 					<div>Default</div>
 					<d2l-course-image></d2l-course-image>
-					<script>
-						var imageObject = {
-							'class': ['course-image'],
-							'properties': {
-								'name': 'structures_0013',
-								'categories': ['default', 'structures/support'],
-								'tags': ['carnival'],
-								'lastModified': 1485968984021
-							},
-							'entities': [{
-								'class': ['color'],
-								'properties': {
-									'description': 'vibrant',
-									'r': 130, 'g': 182, 'b': 213
-								},
-								'rel': ['https://api.brightspace.com/rels/color']
-							}],
-							'links': [{
-								'rel': ['self'],
-								'href': 'https://course-image-catalog.api.brightspace.com/images/b53fc2ae-0de4-41da-85ff-875372daeacc'
-							}, {
-								'rel': ['via'],
-								'href': 'https://www.pexels.com/photo/white-steel-ferris-wheel-89505/'
-							}, {
-								'rel': ['alternate'],
-								'class': ['tile', 'high-density', 'max'],
-								'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/tile-high-density-max-size.jpg',
-								'type': 'image/jpeg'
-							}, {
-								'rel': ['alternate'],
-								'class': ['banner', 'narrow', 'high-density', 'min'],
-								'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/banner-narrow-high-density-min-size.jpg',
-								'type': 'image/jpeg'
-							}],
-							'rel': ['https://api.brightspace.com/rels/organization-image']
-						};
-
-						document.body.querySelector('d2l-course-image').image = imageObject;
-					</script>
 				</template>
 			</demo-snippet>
 		</div>
+		<script>
+			var imageObject = {
+				'class': ['course-image'],
+				'properties': {
+					'name': 'structures_0013',
+					'categories': ['default', 'structures/support'],
+					'tags': ['carnival'],
+					'lastModified': 1485968984021
+				},
+				'entities': [{
+					'class': ['color'],
+					'properties': {
+						'description': 'vibrant',
+						'r': 130, 'g': 182, 'b': 213
+					},
+					'rel': ['https://api.brightspace.com/rels/color']
+				}],
+				'links': [{
+					'rel': ['self'],
+					'href': 'https://course-image-catalog.api.brightspace.com/images/b53fc2ae-0de4-41da-85ff-875372daeacc'
+				}, {
+					'rel': ['via'],
+					'href': 'https://www.pexels.com/photo/white-steel-ferris-wheel-89505/'
+				}, {
+					'rel': ['alternate'],
+					'class': ['tile', 'high-density', 'max'],
+					'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/tile-high-density-max-size.jpg',
+					'type': 'image/jpeg'
+				}, {
+					'rel': ['alternate'],
+					'class': ['banner', 'narrow', 'high-density', 'min'],
+					'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/banner-narrow-high-density-min-size.jpg',
+					'type': 'image/jpeg'
+				}],
+				'rel': ['https://api.brightspace.com/rels/organization-image']
+			};
+
+			window.addEventListener('WebComponentsReady', function() {
+				window.requestAnimationFrame(function() {
+					document.body.querySelector('d2l-course-image').image = imageObject;
+				});
+			});
+		</script>
 	</body>
 </html>
