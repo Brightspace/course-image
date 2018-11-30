@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "postinstall": "polymer install --variants",
-    "lint": "npm run lint:html && polymer lint",
+    "lint": "npm run lint:html && npm run lint:wc",
     "lint:html": "eslint *.html test/*.html test/*.js",
-    "test": "npm run lint && polymer test --skip-plugin sauce"
+    "lint:wc": "polymer lint",
+    "test:polymer:local": "polymer test --skip-plugin sauce",
+    "test:polymer:sauce": "polymer test --skip-plugin local",
+    "test": "npm run lint && npm run test:polymer:local"
   },
   "homepage": "https://github.com/Brightspace/course-image",
   "repository": {
