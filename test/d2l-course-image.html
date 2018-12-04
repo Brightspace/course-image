@@ -19,6 +19,8 @@
 		<script type="module">
 import '../d2l-course-image.js';
 import { dom } from '@polymer/polymer/lib/legacy/polymer.dom.js';
+import SirenParse from 'siren-parser';
+
 var image = {
 	'class': ['course-image'],
 	'properties': {
@@ -144,7 +146,7 @@ describe('d2l-course-image', function() {
 	beforeEach(function() {
 		component = fixture('d2l-course-image-fixture');
 		component._load = true;
-		sirenImage = window.D2L.Hypermedia.Siren.Parse(image);
+		sirenImage = SirenParse(image);
 	});
 
 	it('should exist on the page', function() {
