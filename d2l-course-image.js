@@ -13,7 +13,7 @@ import '@polymer/polymer/polymer-legacy.js';
 
 import 'intersection-observer/intersection-observer.js';
 import 'd2l-organization-hm-behavior/d2l-organization-hm-behavior.js';
-import 'siren-parser/siren-parser.js';
+import SirenParse from 'siren-parser';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
 import { afterNextRender } from '@polymer/polymer/lib/utils/render-status.js';
 import { dom } from '@polymer/polymer/lib/legacy/polymer.dom.js';
@@ -98,7 +98,7 @@ Polymer({
 						break;
 					}
 				}
-			};
+			}.bind(this);
 
 			// Small shim for Edge/IE/Safari
 			var delayFunction = window.requestIdleCallback || setTimeout;
@@ -115,7 +115,7 @@ Polymer({
 
 			var observer = new IntersectionObserver(observerCallback.bind(this));
 			observer.observe(imageElement);
-		});
+		}.bind(this));
 	},
 	_defaultSizes: {
 		mobile: { maxwidth: 767, size: 100 },
@@ -150,7 +150,7 @@ Polymer({
 		}
 		if (!image.getLinksByClass) {
 			// This will re-call _updateImage with the parsed image, so we can return immediately
-			this.image = window.D2L.Hypermedia.Siren.Parse(image);
+			this.image = SirenParse(image);
 			return;
 		}
 
