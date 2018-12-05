@@ -1,35 +1,55 @@
 {
-  "name": "d2l-course-image",
   "description": "Brightspace Course Image",
-  "private": true,
-  "scripts": {
-    "postinstall": "polymer install --variants",
-    "lint": "npm run lint:html && npm run lint:wc",
-    "lint:html": "eslint *.html test/*.html test/*.js",
-    "lint:wc": "polymer lint",
-    "test:polymer:local": "polymer test --skip-plugin sauce",
-    "test:polymer:sauce": "polymer test --skip-plugin local",
-    "test": "npm run lint && npm run test:polymer:local"
-  },
-  "homepage": "https://github.com/Brightspace/course-image",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Brightspace/course-image.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Brightspace/course-image/issues"
-  },
   "keywords": [
     "d2l",
     "course",
     "image"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Brightspace/course-image.git"
+  },
+  "homepage": "https://github.com/Brightspace/course-image",
+  "name": "d2l-course-image",
+  "scripts": {
+    "lint": "npm run lint:wc && npm run lint:js",
+    "lint:js": "eslint . --ext .js,.html test/**/*.js test/**/*.html demo/**/*.js demo/**/*.html",
+    "lint:wc": "polymer lint",
+    "test:polymer:local": "polymer test --skip-plugin sauce",
+    "test:polymer:sauce": "polymer test --skip-plugin local",
+    "test": "npm run lint && npm run test:polymer:local"
+  },
+  "bugs": {
+    "url": "https://github.com/Brightspace/course-image/issues"
+  },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "@polymer/iron-component-page": "^3.0.0-pre.18",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.18",
+    "@polymer/iron-test-helpers": "^3.0.0-pre.18",
+    "@webcomponents/webcomponentsjs": "^2.2.1",
+    "babel-eslint": "^10.0.1",
+    "d2l-typography": "BrightspaceUI/typography#semver:^7.0.2",
     "eslint": "^4.15.0",
     "eslint-config-brightspace": "^0.4.0",
     "eslint-plugin-html": "^4.0.1",
-    "polymer-cli": "^1.5.7"
+    "polymer-cli": "^1.9.1",
+    "wct-browser-legacy": "^1.0.1"
+  },
+  "version": "",
+  "resolutions": {
+    "inherits": "2.0.3",
+    "samsam": "1.1.3",
+    "supports-color": "3.1.2",
+    "type-detect": "1.0.0"
+  },
+  "main": "d2l-course-image.js",
+  "dependencies": {
+    "intersection-observer": "^0.5.1",
+    "d2l-organization-hm-behavior": "Brightspace/organization-hm-behavior#semver:^3.0.0",
+    "@polymer/polymer": "^3.0.0",
+    "siren-parser": "^8.0.0"
   }
 }

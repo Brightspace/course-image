@@ -4,25 +4,54 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 		<title>d2l-course-image demo</title>
-		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-		<link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-		<link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-		<link rel="import" href="../../d2l-typography/d2l-typography.html">
-		<link rel="import" href="../d2l-course-image.html">
-		<custom-style>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+		<script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+		<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
+		<script type="module" src="../d2l-course-image.js"></script>
+		<!-- FIXME(polymer-modulizer):
+		These imperative modules that innerHTML your HTML are
+		a hacky way to be sure that any mixins in included style
+		modules are ready before any elements that reference them are
+		instantiated, otherwise the CSS @apply mixin polyfill won't be
+		able to expand the underlying CSS custom properties.
+		See: https://github.com/Polymer/polymer-modulizer/issues/154
+		-->
+	<script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style>
 			<style is="custom-style" include="demo-pages-shared-styles"></style>
-		</custom-style>
-		<custom-style include="d2l-typography">
+		</custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+		<script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<custom-style include="d2l-typography">
 			<style is="custom-style" include="d2l-typography"></style>
-		</custom-style>
-		<style>
+		</custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+		<script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<style>
 			html {
 				font-size: 20px;
 			}
-		</style>
+		</style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
 	</head>
 	<body unresolved class="d2l-typography">
-		<div class="vertical-section-container centered">
+		<script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
 			<h3>Course Image</h3>
 			<demo-snippet>
 				<template>
@@ -30,49 +59,54 @@
 					<d2l-course-image></d2l-course-image>
 				</template>
 			</demo-snippet>
-		</div>
-		<script>
-			var imageObject = {
-				'class': ['course-image'],
-				'properties': {
-					'name': 'structures_0013',
-					'categories': ['default', 'structures/support'],
-					'tags': ['carnival'],
-					'lastModified': 1485968984021
-				},
-				'entities': [{
-					'class': ['color'],
-					'properties': {
-						'description': 'vibrant',
-						'r': 130, 'g': 182, 'b': 213
-					},
-					'rel': ['https://api.brightspace.com/rels/color']
-				}],
-				'links': [{
-					'rel': ['self'],
-					'href': 'https://course-image-catalog.api.brightspace.com/images/b53fc2ae-0de4-41da-85ff-875372daeacc'
-				}, {
-					'rel': ['via'],
-					'href': 'https://www.pexels.com/photo/white-steel-ferris-wheel-89505/'
-				}, {
-					'rel': ['alternate'],
-					'class': ['tile', 'high-density', 'max'],
-					'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/tile-high-density-max-size.jpg',
-					'type': 'image/jpeg'
-				}, {
-					'rel': ['alternate'],
-					'class': ['banner', 'narrow', 'high-density', 'min'],
-					'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/banner-narrow-high-density-min-size.jpg',
-					'type': 'image/jpeg'
-				}],
-				'rel': ['https://api.brightspace.com/rels/organization-image']
-			};
+		</div>`;
 
-			window.addEventListener('WebComponentsReady', function() {
-				window.requestAnimationFrame(function() {
-					document.body.querySelector('d2l-course-image').image = imageObject;
-				});
-			});
-		</script>
+document.body.appendChild($_documentContainer.content);
+</script>
+		<script type="module">
+import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+import '@polymer/iron-demo-helpers/demo-snippet.js';
+import 'd2l-typography/d2l-typography.js';
+import '../d2l-course-image.js';
+var imageObject = {
+	'class': ['course-image'],
+	'properties': {
+		'name': 'structures_0013',
+		'categories': ['default', 'structures/support'],
+		'tags': ['carnival'],
+		'lastModified': 1485968984021
+	},
+	'entities': [{
+		'class': ['color'],
+		'properties': {
+			'description': 'vibrant',
+			'r': 130, 'g': 182, 'b': 213
+		},
+		'rel': ['https://api.brightspace.com/rels/color']
+	}],
+	'links': [{
+		'rel': ['self'],
+		'href': 'https://course-image-catalog.api.brightspace.com/images/b53fc2ae-0de4-41da-85ff-875372daeacc'
+	}, {
+		'rel': ['via'],
+		'href': 'https://www.pexels.com/photo/white-steel-ferris-wheel-89505/'
+	}, {
+		'rel': ['alternate'],
+		'class': ['tile', 'high-density', 'max'],
+		'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/tile-high-density-max-size.jpg',
+		'type': 'image/jpeg'
+	}, {
+		'rel': ['alternate'],
+		'class': ['banner', 'narrow', 'high-density', 'min'],
+		'href': 'https://s.brightspace.com/course-images/images/b53fc2ae-0de4-41da-85ff-875372daeacc/banner-narrow-high-density-min-size.jpg',
+		'type': 'image/jpeg'
+	}],
+	'rel': ['https://api.brightspace.com/rels/organization-image']
+};
+
+window.requestAnimationFrame(function() {
+	document.body.querySelector('d2l-course-image').image = imageObject;
+});
+</script>
 	</body>
 </html>
