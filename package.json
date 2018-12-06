@@ -31,7 +31,7 @@
     "@polymer/iron-test-helpers": "^3.0.0-pre.18",
     "@webcomponents/webcomponentsjs": "^2.2.1",
     "babel-eslint": "^10.0.1",
-    "d2l-typography": "BrightspaceUI/typography#semver:^7.0.2",
+    "d2l-typography": "BrightspaceUI/typography#semver:^7",
     "eslint": "^4.15.0",
     "eslint-config-brightspace": "^0.4.0",
     "eslint-plugin-html": "^4.0.1",
@@ -48,7 +48,7 @@
   "main": "d2l-course-image.js",
   "dependencies": {
     "intersection-observer": "^0.5.1",
-    "d2l-organization-hm-behavior": "Brightspace/organization-hm-behavior#semver:^3.0.1",
+    "d2l-organization-hm-behavior": "Brightspace/organization-hm-behavior#semver:^3",
     "@polymer/polymer": "^3.0.0",
     "siren-parser": "^8.0.0"
   }
