@@ -36,7 +36,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-course-image">
 			}
 		</style>
 
-		<img src="[[_src]]" srcset$="[[_srcset]]" sizes$="[[_tileSizes]]" on-load="_showImage" class$="[[_imageClass]]">
+		<img src="[[_src]]" srcset$="[[_srcset]]" sizes$="[[_tileSizes]]" on-load="_showImage" class$="[[_imageClass]]" alt="" aria-hidden="">
 
 	</template>
 	
