@@ -1,7 +1,6 @@
 {
   "npm": true,
   "lint": {
-    "rules": ["polymer-3"],
-    "ignoreWarnings": ["cant-resolve-module-specifier", "could-not-resolve-reference"]
+    "rules": ["polymer-3"]
   }
 }
