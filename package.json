@@ -46,9 +46,10 @@
   },
   "main": "d2l-course-image.js",
   "dependencies": {
-    "intersection-observer": "^0.5.1",
-    "d2l-organization-hm-behavior": "Brightspace/organization-hm-behavior#semver:^3",
+    "@brightspace-ui/core": "^1",
     "@polymer/polymer": "^3.0.0",
+    "d2l-organization-hm-behavior": "Brightspace/organization-hm-behavior#semver:^3",
+    "intersection-observer": "^0.5.1",
     "siren-parser": "^8.0.0"
   }
 }

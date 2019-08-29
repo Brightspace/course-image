@@ -9,6 +9,7 @@ Polymer-based web component for course image.
   from HTML and may be out of place here. Review them and
   then delete this comment!
 */
+import '@brightspace-ui/core/helpers/requestIdleCallback.js';
 import '@polymer/polymer/polymer-legacy.js';
 
 import 'intersection-observer/intersection-observer.js';
@@ -39,7 +40,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-course-image">
 		<img src="[[_src]]" srcset$="[[_srcset]]" sizes$="[[_tileSizes]]" on-load="_showImage" class$="[[_imageClass]]" alt="" aria-hidden="">
 
 	</template>
-	
+
 </dom-module>`;
 
 document.head.appendChild($_documentContainer.content);
@@ -100,9 +101,7 @@ Polymer({
 				}
 			}.bind(this);
 
-			// Small shim for Edge/IE/Safari
-			var delayFunction = window.requestIdleCallback || setTimeout;
-			delayFunction(function() {
+			requestIdleCallback(function() {
 				if (this._load) {
 					// The tile already loaded via the IntersectionObserver
 					return;
