@@ -34,10 +34,22 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-course-image">
 				opacity: 0;
 				transition: opacity 0.5s;
 			}
+
+			:host([load-error]) img {
+				display: none;
+			}
+
+			svg {
+				display: none;
+			}
+
+			:host([load-error]) svg {
+				display: block;
+			}
 		</style>
 
 		<img src="[[_src]]" srcset$="[[_srcset]]" sizes$="[[_tileSizes]]" on-load="_showImage" on-error="_handleError" class$="[[_imageClass]]" alt="" aria-hidden="">
-
+		<svg width="231" height="103" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="#E3E9F1" d="M0 0h231v103H0z"/><path d="M231 89l-41.216-37.138c-2.4-2.874-6.624-5-11.712-5.92-1.824-.287-3.648-.46-5.472-.46-3.36 0-6.72.518-9.696 1.552L101.368 68.53 77.752 58.93c-3.264-1.322-7.008-1.954-10.752-1.954-4.992 0-9.888 1.15-13.536 3.39L0 87v16h231V89z" fill="#CDD5DC"/><path d="M116 41c0 8.636-5 15-15 15s-15-6.364-15-15 5-15 15-15 15 6.364 15 15z" fill="#CDD5DC"/></g></svg>
 	</template>
 
 </dom-module>`;
@@ -67,6 +79,7 @@ Polymer({
 		 * The image that you want to display.  It must be in the same format as the course-catalog images.
 		 */
 		image: Object,
+		loadError: { type: Boolean, reflectToAttribute: true },
 		_imageClass: String,
 		_src: String,
 		_srcset: String,
@@ -75,14 +88,13 @@ Polymer({
 			computed: '_generateSizes(sizes)'
 		},
 		// Set by the `IntersectionObserver` when the image is first visible in viewport
-		_load: Boolean,
-		_loadError: Boolean
+		_load: Boolean
 	},
 	behaviors: [
 		D2L.PolymerBehaviors.Hypermedia.OrganizationHMBehavior
 	],
 	observers: [
-		'_updateImage(_load, image, type, _loadError)'
+		'_updateImage(_load, image, type)'
 	],
 	attached: function() {
 		afterNextRender(this, function() {
@@ -145,12 +157,7 @@ Polymer({
 			return sizeObj;
 		}
 	},
-	_updateImage: function(load, image, type, loadError) {
-		if (loadError) {
-			this._src = 'data:image/svg+xml,%3Csvg%20width%3D%22231%22%20height%3D%22103%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%3E%3Cpath%20fill%3D%22%23E3E9F1%22%20d%3D%22M0%200h231v103H0z%22%2F%3E%3Cpath%20d%3D%22M231%2089l-41.216-37.138c-2.4-2.874-6.624-5-11.712-5.92-1.824-.287-3.648-.46-5.472-.46-3.36%200-6.72.518-9.696%201.552L101.368%2068.53%2077.752%2058.93c-3.264-1.322-7.008-1.954-10.752-1.954-4.992%200-9.888%201.15-13.536%203.39L0%2087v16h231V89z%22%20fill%3D%22%23CDD5DC%22%2F%3E%3Cpath%20d%3D%22M116%2041c0%208.636-5%2015-15%2015s-15-6.364-15-15%205-15%2015-15%2015%206.364%2015%2015z%22%20fill%3D%22%23CDD5DC%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E';
-			this._srcset = null;
-			return;
-		}
+	_updateImage: function(load, image, type) {
 		if (!load || !image) {
 			return;
 		}
@@ -176,8 +183,9 @@ Polymer({
 			this.fire('course-image-loaded');
 		}.bind(this));
 	},
+
 	_handleError: function() {
-		this._loadError = true;
+		this.loadError = true;
 	},
 	/**
 	 * Gets the tile sizes as a string with units, based on the `sizes` object passed into the element
