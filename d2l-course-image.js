@@ -39,17 +39,26 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-course-image">
 				display: none;
 			}
 
-			svg {
+			.d2l-course-image-error-container {
 				display: none;
+				height: 100%;
+				width: 100%;
 			}
 
-			:host([load-error]) svg {
+			:host([load-error]) .d2l-course-image-error-container {
 				display: block;
 			}
 		</style>
 
 		<img src="[[_src]]" srcset$="[[_srcset]]" sizes$="[[_tileSizes]]" on-load="_showImage" on-error="_handleError" class$="[[_imageClass]]" alt="" aria-hidden="">
-		<svg width="231" height="103" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path fill="#E3E9F1" d="M0 0h231v103H0z"/><path d="M231 89l-41.216-37.138c-2.4-2.874-6.624-5-11.712-5.92-1.824-.287-3.648-.46-5.472-.46-3.36 0-6.72.518-9.696 1.552L101.368 68.53 77.752 58.93c-3.264-1.322-7.008-1.954-10.752-1.954-4.992 0-9.888 1.15-13.536 3.39L0 87v16h231V89z" fill="#CDD5DC"/><path d="M116 41c0 8.636-5 15-15 15s-15-6.364-15-15 5-15 15-15 15 6.364 15 15z" fill="#CDD5DC"/></g></svg>
+		<div class="d2l-course-image-error-container">
+			<svg viewBox="0 0 231 103" xmlns="http://www.w3.org/2000/svg">
+				<g fill="none" fill-rule="evenodd"><path fill="#E3E9F1" d="M0 0h231v103H0z"/>
+					<path d="M231 89l-41.216-37.138c-2.4-2.874-6.624-5-11.712-5.92-1.824-.287-3.648-.46-5.472-.46-3.36 0-6.72.518-9.696 1.552L101.368 68.53 77.752 58.93c-3.264-1.322-7.008-1.954-10.752-1.954-4.992 0-9.888 1.15-13.536 3.39L0 87v16h231V89z" fill="#CDD5DC"/>
+					<path d="M116 41c0 8.636-5 15-15 15s-15-6.364-15-15 5-15 15-15 15 6.364 15 15z" fill="#CDD5DC"/>
+				</g>
+			</svg>
+		</div>
 	</template>
 
 </dom-module>`;
@@ -79,7 +88,7 @@ Polymer({
 		 * The image that you want to display.  It must be in the same format as the course-catalog images.
 		 */
 		image: Object,
-		loadError: { type: Boolean, reflectToAttribute: true },
+		loadError: { type: Boolean, readOnly: true, reflectToAttribute: true },
 		_imageClass: String,
 		_src: String,
 		_srcset: String,
@@ -185,7 +194,7 @@ Polymer({
 	},
 
 	_handleError: function() {
-		this.loadError = true;
+		this._setLoadError(true);
 	},
 	/**
 	 * Gets the tile sizes as a string with units, based on the `sizes` object passed into the element
