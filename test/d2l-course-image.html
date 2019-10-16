@@ -210,6 +210,19 @@ describe('d2l-course-image', function() {
 		expect(component._src).to.not.equal('foo');
 	});
 
+	it('should set loadError on error loading image', function() {
+		component._handleError();
+		expect(component.loadError).to.equal(true);
+	});
+
+	it('should hide img and show svg on error loading image', function() {
+		component._handleError();
+		var img = dom(component.root).querySelector('img');
+		var errorContainer = dom(component.root).querySelector('.d2l-course-image-error-container');
+		expect(getComputedStyle(img).display).to.equal('none');
+		expect(getComputedStyle(errorContainer).display).to.equal('block');
+	});
+
 });
 </script>
 	</body>
