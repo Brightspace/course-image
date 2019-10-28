@@ -6,10 +6,10 @@ A [Polymer](https://www.polymer-project.org)-based web component D2L course-imag
 
 ## Installation
 
-`d2l-course-image` can be installed from Bower:
+`d2l-course-image` can be installed from npm:
 
 ```shell
-bower install git://github.com/Brightspace/course-image.git#v0.0.1
+npm install git://github.com/Brightspace/course-image.git#v0.0.1
 ```
 
 ## Usage
