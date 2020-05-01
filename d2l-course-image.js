@@ -51,7 +51,15 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-course-image">
 			}
 		</style>
 
-		<img src="[[_src]]" srcset$="[[_srcset]]" sizes$="[[_tileSizes]]" on-load="_showImage" on-error="_handleError" class$="[[_imageClass]]" alt="" aria-hidden="">
+		<picture>
+			<dom-repeat items="[[_srcsets]]">
+				<template strip-whitespace="">
+					<source srcset="[[item.srcset]]" type="[[item.type]]">
+				</template>
+			</dom-repeat>
+
+			<img src="[[_src]]" srcset$="[[_srcset]]" sizes$="[[_tileSizes]]" on-load="_showImage" on-error="_handleError" class$="[[_imageClass]]" alt="" aria-hidden="">
+		</picture>
 		<div class="d2l-course-image-error-container">
 			<svg viewBox="0 0 231 103" xmlns="http://www.w3.org/2000/svg">
 				<g fill="none" fill-rule="evenodd"><path fill="#E3E9F1" d="M0 0h231v103H0z"/>
@@ -93,6 +101,7 @@ Polymer({
 		_imageClass: String,
 		_src: String,
 		_srcset: String,
+		_srcsets: Object,
 		_tileSizes: {
 			type: String,
 			computed: '_generateSizes(sizes)'
@@ -183,6 +192,10 @@ Polymer({
 		var imageSrcset = this.getImageSrcset(image, type, image.forceImageRefresh);
 		if (imageSrcset) {
 			this._srcset = imageSrcset;
+		}
+		var pictureSrcsets = this.getPictureSrcsets(image, type, image.forceImageRefresh);
+		if (pictureSrcsets) {
+			this._srcsets = pictureSrcsets;
 		}
 	},
 	_showImage: function() {
