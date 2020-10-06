@@ -223,6 +223,18 @@ describe('d2l-course-image', function() {
 		expect(getComputedStyle(errorContainer).display).to.equal('block');
 	});
 
+	it('should show image again if successful re-load after error', function() {
+		component._handleError();
+		var img = dom(component.root).querySelector('img');
+		var errorContainer = dom(component.root).querySelector('.d2l-course-image-error-container');
+		expect(getComputedStyle(img).display).to.equal('none');
+		expect(getComputedStyle(errorContainer).display).to.equal('block');
+
+		component._showImage();
+		expect(getComputedStyle(img).display).to.equal('inline');
+		expect(getComputedStyle(errorContainer).display).to.equal('none');
+	});
+
 });
 </script>
 	</body>

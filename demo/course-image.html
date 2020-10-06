@@ -56,7 +56,21 @@ $_documentContainer.innerHTML = `<div class="vertical-section-container centered
 			<demo-snippet>
 				<template>
 					<div>Default</div>
-					<d2l-course-image></d2l-course-image>
+					<d2l-course-image id="success"></d2l-course-image>
+				</template>
+			</demo-snippet>
+
+			<demo-snippet>
+				<template>
+					<div>Initial Loading Error</div>
+					<d2l-course-image id="eventual-success" load-error></d2l-course-image>
+				</template>
+			</demo-snippet>
+
+			<demo-snippet>
+				<template>
+					<div>Loading Error</div>
+					<d2l-course-image load-error></d2l-course-image>
 				</template>
 			</demo-snippet>
 		</div>`;
@@ -105,7 +119,10 @@ var imageObject = {
 };
 
 window.requestAnimationFrame(function() {
-	document.body.querySelector('d2l-course-image').image = imageObject;
+	document.body.querySelector('d2l-course-image#success').image = imageObject;
+	setTimeout(() => {
+		document.body.querySelector('d2l-course-image#eventual-success').image = imageObject;
+	}, 3000);
 });
 </script>
 	</body>
