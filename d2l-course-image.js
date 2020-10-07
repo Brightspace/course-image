@@ -186,6 +186,7 @@ Polymer({
 		}
 	},
 	_showImage: function() {
+		this._setLoadError(false);
 		this._imageClass = 'shown';
 		afterNextRender(this, function() {
 			this.fire('course-image-loaded');
